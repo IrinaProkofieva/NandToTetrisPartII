@@ -1,0 +1,48 @@
+/** Implements a game field. */
+class GameField {
+
+	field int counter;
+	field int next;
+	field Random r;
+	field CactusList cactuses;
+	
+	constructor GameField new() {
+		let r = Random.new();
+		let counter = 0;
+		let next = counter + r.rand();
+		let cactuses = null;
+		do draw();
+		return this;
+	}
+	
+	method void dispose() {
+		do r.dispose();
+		do cactuses.dispose();
+		do Memory.deAlloc(this);
+		return;
+	}
+	
+	method void draw() {
+		do Screen.drawLine(0, 236, 511, 236);
+		return;
+	}
+	
+	method void move() {
+		let counter = counter + 1;
+		
+		if (next = counter) {
+			let cactuses = CactusList.new(Cactus.new(), cactuses);
+			let next = counter + r.rand();
+		}
+		
+		do cactuses.move();
+		
+		
+		do draw();
+		return;
+	}
+	
+	method boolean hasCactusInDinoZone() {
+		return cactuses.hasCactusInDinoZone();
+	}
+}

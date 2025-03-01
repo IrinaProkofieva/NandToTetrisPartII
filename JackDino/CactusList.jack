@@ -1,0 +1,71 @@
+/** Implements a list of cactuses. */
+class CactusList {
+	
+	field Cactus data;
+	field CactusList next;
+	field boolean anyCactusInDinoZone;
+	
+	constructor CactusList new(Cactus cactus, CactusList previousCactuses) {
+		let data = cactus;
+		let next = previousCactuses;
+		let anyCactusInDinoZone = false;
+		return this;
+	}
+	
+	method void dispose() {
+		if (~(next = null)) {
+			do next.dispose();
+		}
+		do Memory.deAlloc(this);
+		return;
+	}
+	
+	method void move() {
+		var CactusList current;
+		var CactusList tail;
+		var CactusList prev;
+		var Cactus currentCactus;
+		let current = this;
+		let prev = null;
+		
+		while (~(current = null)) {
+			let currentCactus = current.getData();
+			do currentCactus.move();
+			if (currentCactus.isQuiteInDinoZone()) {
+				let anyCactusInDinoZone = false;
+			}
+			if (currentCactus.isInDinoZone()) {
+				let anyCactusInDinoZone = true;
+			}
+			let tail = current.getNext();
+			if (tail = null) {
+				if (currentCactus.isOut()) {
+					if (~(prev = null)) {
+						do prev.nullNext();
+					}
+					do current.dispose();
+				}
+			}
+			let prev = current;
+			let current = tail;
+		}
+		return;
+	}
+	
+	method CactusList getNext() {
+		return next;
+	}
+	
+	method CactusList getData() {
+		return data;
+	}
+	
+	method void nullNext() {
+		let next = null;
+		return;
+	}
+	
+	method boolean hasCactusInDinoZone() {
+		return anyCactusInDinoZone;
+	}
+}

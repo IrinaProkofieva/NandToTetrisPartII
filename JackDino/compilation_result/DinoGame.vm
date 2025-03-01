@@ -1,0 +1,246 @@
+function DinoGame.new 0
+    push constant 4
+    call Memory.alloc 1
+    pop pointer 0
+    push constant 32
+    push constant 208
+    call Dino.new 2
+    pop this 0
+    call GameField.new 0
+    pop this 1
+    push constant 2
+    pop this 2
+    push constant 0
+    pop this 3
+    push pointer 0
+    return
+function DinoGame.dispose 0
+    push argument 0
+    pop pointer 0
+    push this 0
+    call Dino.dispose 1
+    pop temp 0
+    push this 1
+    call GameField.dispose 1
+    pop temp 0
+    push pointer 0
+    call Memory.deAlloc 1
+    pop temp 0
+    push constant 0
+    return
+function DinoGame.checkField 0
+    push argument 0
+    pop pointer 0
+    push this 1
+    call GameField.hasCactusInDinoZone 1
+    push this 0
+    call Dino.getDownLine 1
+    push constant 222
+    gt
+    and
+    not
+    if-goto DinoGame_1
+    push constant 10
+    call String.new 1
+    push constant 71
+    call String.appendChar 2
+    push constant 65
+    call String.appendChar 2
+    push constant 77
+    call String.appendChar 2
+    push constant 69
+    call String.appendChar 2
+    push constant 32
+    call String.appendChar 2
+    push constant 79
+    call String.appendChar 2
+    push constant 86
+    call String.appendChar 2
+    push constant 69
+    call String.appendChar 2
+    push constant 82
+    call String.appendChar 2
+    push constant 33
+    call String.appendChar 2
+    call Output.printString 1
+    pop temp 0
+    push constant 7
+    call String.new 1
+    push constant 83
+    call String.appendChar 2
+    push constant 67
+    call String.appendChar 2
+    push constant 79
+    call String.appendChar 2
+    push constant 82
+    call String.appendChar 2
+    push constant 69
+    call String.appendChar 2
+    push constant 58
+    call String.appendChar 2
+    push constant 32
+    call String.appendChar 2
+    call Output.printString 1
+    pop temp 0
+    push this 3
+    push constant 3
+    call Math.divide 2
+    push constant 1
+    add
+    call Output.printInt 1
+    pop temp 0
+    push constant 0
+    return
+    goto DinoGame_0
+label DinoGame_1
+label DinoGame_0
+    push this 1
+    call GameField.hasCactusInDinoZone 1
+    not
+    if-goto DinoGame_3
+    push this 3
+    push constant 1
+    add
+    pop this 3
+    goto DinoGame_2
+label DinoGame_3
+label DinoGame_2
+    push constant 1
+    neg
+    return
+function DinoGame.run 3
+    push argument 0
+    pop pointer 0
+    push constant 1
+    neg
+    pop local 1
+    push constant 0
+    pop local 2
+label DinoGame_4
+    push constant 1
+    neg
+    not
+    if-goto DinoGame_5
+    push local 1
+    not
+    if-goto DinoGame_7
+label DinoGame_8
+    push local 1
+    push local 0
+    push constant 0
+    eq
+    and
+    not
+    if-goto DinoGame_9
+    call Keyboard.keyPressed 0
+    pop local 0
+    push local 2
+    not
+    push local 0
+    push constant 115
+    eq
+    and
+    not
+    if-goto DinoGame_11
+    push constant 1
+    neg
+    pop local 2
+    goto DinoGame_10
+label DinoGame_11
+label DinoGame_10
+    push local 2
+    not
+    if-goto DinoGame_13
+    push pointer 0
+    call DinoGame.checkField 1
+    pop local 1
+    push local 1
+    not
+    if-goto DinoGame_15
+    push this 0
+    push this 2
+    call Dino.move 2
+    pop temp 0
+    push this 1
+    call GameField.move 1
+    pop temp 0
+    goto DinoGame_14
+label DinoGame_15
+label DinoGame_14
+    goto DinoGame_12
+label DinoGame_13
+label DinoGame_12
+    push constant 5
+    call Sys.wait 1
+    pop temp 0
+    goto DinoGame_8
+label DinoGame_9
+    push local 2
+    not
+    if-goto DinoGame_17
+    push local 0
+    push constant 131
+    eq
+    not
+    if-goto DinoGame_19
+    push constant 1
+    pop this 2
+    goto DinoGame_18
+label DinoGame_19
+    push constant 2
+    pop this 2
+label DinoGame_18
+label DinoGame_20
+    push local 1
+    push local 0
+    push constant 0
+    eq
+    not
+    and
+    not
+    if-goto DinoGame_21
+    push pointer 0
+    call DinoGame.checkField 1
+    pop local 1
+    push local 1
+    not
+    if-goto DinoGame_23
+    call Keyboard.keyPressed 0
+    pop local 0
+    push this 0
+    push this 2
+    call Dino.move 2
+    pop temp 0
+    push this 1
+    call GameField.move 1
+    pop temp 0
+    push local 0
+    push constant 131
+    eq
+    not
+    if-goto DinoGame_25
+    push constant 1
+    pop this 2
+    goto DinoGame_24
+label DinoGame_25
+    push constant 2
+    pop this 2
+label DinoGame_24
+    push constant 5
+    call Sys.wait 1
+    pop temp 0
+    goto DinoGame_22
+label DinoGame_23
+label DinoGame_22
+    goto DinoGame_20
+label DinoGame_21
+    goto DinoGame_16
+label DinoGame_17
+label DinoGame_16
+    goto DinoGame_6
+label DinoGame_7
+label DinoGame_6
+    goto DinoGame_4
+label DinoGame_5
+    push constant 0
+    return

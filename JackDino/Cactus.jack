@@ -1,0 +1,56 @@
+/** Implements a cactus. */
+class Cactus {
+	
+	field int x, y;
+	
+	constructor Cactus new() {
+		let x = 501;
+		let y = 220;
+		do draw();
+		return this;
+	}
+	
+	method void dispose() {
+		do Memory.deAlloc(this);
+		return;
+	}
+	
+	method void draw() {
+		do Screen.drawRectangle(x, y + 3, x + 1, y + 8);
+		do Screen.drawRectangle(x + 2, y + 7, x + 3, y + 8);
+		do Screen.drawRectangle(x + 4, y, x + 6, y + 16);
+		do Screen.drawRectangle(x + 7, y + 8, x + 8, y + 9);
+		do Screen.drawRectangle(x + 9, y + 5, x + 10, y + 9);
+		return;
+	}
+	
+	method void erase() {
+		do Screen.setColor(false);
+		do draw();
+		do Screen.setColor(true);
+		return;
+	}
+	
+	method void move() {
+		do erase();
+		let x = x - 3;
+		if (x > 0) {
+			do draw();	
+		}
+		return;
+	}
+	
+	method boolean isOut() {
+		var boolean out;
+		let out = ((x = 0) | (x < 0));
+		return out;
+	}
+	
+	method boolean isInDinoZone() {
+		return (x > 20) & (x < 56);
+	}
+	
+	method boolean isQuiteInDinoZone() {
+		return x < 20;
+	}
+}

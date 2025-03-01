@@ -1,0 +1,161 @@
+function Cactus.new 0
+    push constant 2
+    call Memory.alloc 1
+    pop pointer 0
+    push constant 501
+    pop this 0
+    push constant 220
+    pop this 1
+    push pointer 0
+    call Cactus.draw 1
+    pop temp 0
+    push pointer 0
+    return
+function Cactus.dispose 0
+    push argument 0
+    pop pointer 0
+    push pointer 0
+    call Memory.deAlloc 1
+    pop temp 0
+    push constant 0
+    return
+function Cactus.draw 0
+    push argument 0
+    pop pointer 0
+    push this 0
+    push this 1
+    push constant 3
+    add
+    push this 0
+    push constant 1
+    add
+    push this 1
+    push constant 8
+    add
+    call Screen.drawRectangle 4
+    pop temp 0
+    push this 0
+    push constant 2
+    add
+    push this 1
+    push constant 7
+    add
+    push this 0
+    push constant 3
+    add
+    push this 1
+    push constant 8
+    add
+    call Screen.drawRectangle 4
+    pop temp 0
+    push this 0
+    push constant 4
+    add
+    push this 1
+    push this 0
+    push constant 6
+    add
+    push this 1
+    push constant 16
+    add
+    call Screen.drawRectangle 4
+    pop temp 0
+    push this 0
+    push constant 7
+    add
+    push this 1
+    push constant 8
+    add
+    push this 0
+    push constant 8
+    add
+    push this 1
+    push constant 9
+    add
+    call Screen.drawRectangle 4
+    pop temp 0
+    push this 0
+    push constant 9
+    add
+    push this 1
+    push constant 5
+    add
+    push this 0
+    push constant 10
+    add
+    push this 1
+    push constant 9
+    add
+    call Screen.drawRectangle 4
+    pop temp 0
+    push constant 0
+    return
+function Cactus.erase 0
+    push argument 0
+    pop pointer 0
+    push constant 0
+    call Screen.setColor 1
+    pop temp 0
+    push pointer 0
+    call Cactus.draw 1
+    pop temp 0
+    push constant 1
+    neg
+    call Screen.setColor 1
+    pop temp 0
+    push constant 0
+    return
+function Cactus.move 0
+    push argument 0
+    pop pointer 0
+    push pointer 0
+    call Cactus.erase 1
+    pop temp 0
+    push this 0
+    push constant 3
+    sub
+    pop this 0
+    push this 0
+    push constant 0
+    gt
+    not
+    if-goto Cactus_1
+    push pointer 0
+    call Cactus.draw 1
+    pop temp 0
+    goto Cactus_0
+label Cactus_1
+label Cactus_0
+    push constant 0
+    return
+function Cactus.isOut 1
+    push argument 0
+    pop pointer 0
+    push this 0
+    push constant 0
+    eq
+    push this 0
+    push constant 0
+    lt
+    or
+    pop local 0
+    push local 0
+    return
+function Cactus.isInDinoZone 0
+    push argument 0
+    pop pointer 0
+    push this 0
+    push constant 20
+    gt
+    push this 0
+    push constant 56
+    lt
+    and
+    return
+function Cactus.isQuiteInDinoZone 0
+    push argument 0
+    pop pointer 0
+    push this 0
+    push constant 20
+    lt
+    return

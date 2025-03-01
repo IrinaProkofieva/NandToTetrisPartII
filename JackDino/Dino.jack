@@ -1,0 +1,189 @@
+/** Implements a dino. */
+class Dino {
+	
+	field int x, y;
+	
+	constructor Dino new(int Ax, int Ay) {
+		let x = Ax;
+		let y = Ay;
+		do draw();
+		return this;
+	}
+	
+	method void dispose() {
+		do Memory.deAlloc(this);
+		return;
+	}
+	
+	method void draw() {
+		var int memAddress;
+		let memAddress = 16384 + (32 * y) + (x / 16);
+		do Memory.poke(memAddress + 0, 0);
+		do Memory.poke(memAddress + 1, 16380);
+		do Memory.poke(memAddress + 32, 0);
+		do Memory.poke(memAddress + 33, 16380);
+		do Memory.poke(memAddress + 64, 0);
+		do Memory.poke(memAddress + 65, -1);
+		do Memory.poke(memAddress + 96, 0);
+		do Memory.poke(memAddress + 97, -1);
+		do Memory.poke(memAddress + 128, 0);
+		do Memory.poke(memAddress + 129, -49);
+		do Memory.poke(memAddress + 160, 0);
+		do Memory.poke(memAddress + 161, -49);
+		do Memory.poke(memAddress + 192, 0);
+		do Memory.poke(memAddress + 193, -1);
+		do Memory.poke(memAddress + 224, 0);
+		do Memory.poke(memAddress + 225, -1);
+		do Memory.poke(memAddress + 256, 0);
+		do Memory.poke(memAddress + 257, -1);
+		do Memory.poke(memAddress + 288, 0);
+		do Memory.poke(memAddress + 289, -1);
+		do Memory.poke(memAddress + 320, 0);
+		do Memory.poke(memAddress + 321, 255);
+		do Memory.poke(memAddress + 352, 0);
+		do Memory.poke(memAddress + 353, 255);
+		do Memory.poke(memAddress + 384, 3);
+		do Memory.poke(memAddress + 385, 16383);
+		do Memory.poke(memAddress + 416, 3);
+		do Memory.poke(memAddress + 417, 16383);
+		do Memory.poke(memAddress + 448, -16369);
+		do Memory.poke(memAddress + 449, 63);
+		do Memory.poke(memAddress + 480, -16369);
+		do Memory.poke(memAddress + 481, 63);
+		do Memory.poke(memAddress + 512, -1);
+		do Memory.poke(memAddress + 513, 1023);
+		do Memory.poke(memAddress + 544, -1);
+		do Memory.poke(memAddress + 545, 1023);
+		do Memory.poke(memAddress + 576, -1);
+		do Memory.poke(memAddress + 577, 831);
+		do Memory.poke(memAddress + 608, -1);
+		do Memory.poke(memAddress + 609, 831);
+		do Memory.poke(memAddress + 640, -4);
+		do Memory.poke(memAddress + 641, 63);
+		do Memory.poke(memAddress + 672, -4);
+		do Memory.poke(memAddress + 673, 63);
+		do Memory.poke(memAddress + 704, -16);
+		do Memory.poke(memAddress + 705, 63);
+		do Memory.poke(memAddress + 736, -16);
+		do Memory.poke(memAddress + 737, 63);
+		do Memory.poke(memAddress + 768, -256);
+		do Memory.poke(memAddress + 769, 15);
+		do Memory.poke(memAddress + 800, -256);
+		do Memory.poke(memAddress + 801, 15);
+		do Memory.poke(memAddress + 832, 15360);
+		do Memory.poke(memAddress + 833, 3);
+		do Memory.poke(memAddress + 864, 15360);
+		do Memory.poke(memAddress + 865, 3);
+		do Memory.poke(memAddress + 896, 3072);
+		do Memory.poke(memAddress + 897, 3);
+		do Memory.poke(memAddress + 928, 3072);
+		do Memory.poke(memAddress + 929, 3);
+		do Memory.poke(memAddress + 960, 15360);
+		do Memory.poke(memAddress + 961, 15);
+		do Memory.poke(memAddress + 992, 15360);
+		do Memory.poke(memAddress + 993, 15);
+		return;
+	}
+	
+	method void erase(int xLoc, int yLoc) {
+		var int memAddress;
+		let memAddress = 16384 + (32 * yLoc) + (xLoc / 16);
+		do Memory.poke(memAddress + 0, 0);
+		do Memory.poke(memAddress + 1, 0);
+		do Memory.poke(memAddress + 32, 0);
+		do Memory.poke(memAddress + 33, 0);
+		do Memory.poke(memAddress + 64, 0);
+		do Memory.poke(memAddress + 65, 0);
+		do Memory.poke(memAddress + 96, 0);
+		do Memory.poke(memAddress + 97, 0);
+		do Memory.poke(memAddress + 128, 0);
+		do Memory.poke(memAddress + 129, 0);
+		do Memory.poke(memAddress + 160, 0);
+		do Memory.poke(memAddress + 161, 0);
+		do Memory.poke(memAddress + 192, 0);
+		do Memory.poke(memAddress + 193, 0);
+		do Memory.poke(memAddress + 224, 0);
+		do Memory.poke(memAddress + 225, 0);
+		do Memory.poke(memAddress + 256, 0);
+		do Memory.poke(memAddress + 257, 0);
+		do Memory.poke(memAddress + 288, 0);
+		do Memory.poke(memAddress + 289, 0);
+		do Memory.poke(memAddress + 320, 0);
+		do Memory.poke(memAddress + 321, 0);
+		do Memory.poke(memAddress + 352, 0);
+		do Memory.poke(memAddress + 352, 0);
+		do Memory.poke(memAddress + 384, 0);
+		do Memory.poke(memAddress + 385, 0);
+		do Memory.poke(memAddress + 416, 0);
+		do Memory.poke(memAddress + 417, 0);
+		do Memory.poke(memAddress + 448, 0);
+		do Memory.poke(memAddress + 449, 0);
+		do Memory.poke(memAddress + 480, 0);
+		do Memory.poke(memAddress + 481, 0);
+		do Memory.poke(memAddress + 512, 0);
+		do Memory.poke(memAddress + 513, 0);
+		do Memory.poke(memAddress + 544, 0);
+		do Memory.poke(memAddress + 545, 0);
+		do Memory.poke(memAddress + 576, 0);
+		do Memory.poke(memAddress + 577, 0);
+		do Memory.poke(memAddress + 608, 0);
+		do Memory.poke(memAddress + 609, 0);
+		do Memory.poke(memAddress + 640, 0);
+		do Memory.poke(memAddress + 641, 0);
+		do Memory.poke(memAddress + 672, 0);
+		do Memory.poke(memAddress + 673, 0);
+		do Memory.poke(memAddress + 704, 0);
+		do Memory.poke(memAddress + 705, 0);
+		do Memory.poke(memAddress + 736, 0);
+		do Memory.poke(memAddress + 737, 0);
+		do Memory.poke(memAddress + 768, 0);
+		do Memory.poke(memAddress + 769, 0);
+		do Memory.poke(memAddress + 800, 0);
+		do Memory.poke(memAddress + 801, 0);
+		do Memory.poke(memAddress + 832, 0);
+		do Memory.poke(memAddress + 833, 0);
+		do Memory.poke(memAddress + 864, 0);
+		do Memory.poke(memAddress + 865, 0);
+		do Memory.poke(memAddress + 896, 0);
+		do Memory.poke(memAddress + 897, 0);
+		do Memory.poke(memAddress + 928, 0);
+		do Memory.poke(memAddress + 929, 0);
+		do Memory.poke(memAddress + 960, 0);
+		do Memory.poke(memAddress + 961, 0);
+		do Memory.poke(memAddress + 992, 0);
+		do Memory.poke(memAddress + 993, 0);
+		return;
+	}
+	
+	method void moveUp() {
+		var int yOld;
+		let yOld = y;
+		let y = Math.max(y - 2, 128);
+		if (~(yOld=y)) {
+			do erase(x, yOld);
+		}
+		do draw();
+		return;
+	}
+	
+	method void moveDown() {
+		var int yOld;
+		let yOld = y;
+		let y = Math.min(y + 2, 208);
+		if (~(yOld=y)) {
+			do erase(x, yOld);
+		}
+		do draw();
+		return;
+	}
+	
+	method void move(int direction) {
+		if (direction = 1) { do moveUp(); }
+		else { do moveDown(); }
+		return;
+	}
+	
+	method int getDownLine() {
+		return y + 31;
+	}
+}

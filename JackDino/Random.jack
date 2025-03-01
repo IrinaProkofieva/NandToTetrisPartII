@@ -1,0 +1,32 @@
+class Random {
+
+	field int seed;
+	field int a;
+	field int c;
+	field int m;
+	
+	constructor Random new() {
+		let seed = 2;
+		let a = 45;
+		let c = 21;
+		let m = 67;
+		return this;
+	}
+	
+	method void dispose() {
+		do Memory.deAlloc(this);
+		return;
+	}
+	
+	function int mod(int a, int b) {
+		var int m;
+		let m = a - (b * (a / b));
+		return m;
+	}
+
+	// seed = (a * seed + c) % m;
+	method int rand() {
+		let seed = Random.mod(((a * seed) + c), m);
+		return seed + Random.mod(((a * seed) + c), m);
+	}
+}

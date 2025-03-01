@@ -1,0 +1,134 @@
+function CactusList.new 0
+    push constant 3
+    call Memory.alloc 1
+    pop pointer 0
+    push argument 0
+    pop this 0
+    push argument 1
+    pop this 1
+    push constant 0
+    pop this 2
+    push pointer 0
+    return
+function CactusList.dispose 0
+    push argument 0
+    pop pointer 0
+    push this 1
+    push constant 0
+    eq
+    not
+    not
+    if-goto CactusList_1
+    push this 1
+    call CactusList.dispose 1
+    pop temp 0
+    goto CactusList_0
+label CactusList_1
+label CactusList_0
+    push pointer 0
+    call Memory.deAlloc 1
+    pop temp 0
+    push constant 0
+    return
+function CactusList.move 4
+    push argument 0
+    pop pointer 0
+    push pointer 0
+    pop local 0
+    push constant 0
+    pop local 2
+label CactusList_2
+    push local 0
+    push constant 0
+    eq
+    not
+    not
+    if-goto CactusList_3
+    push local 0
+    call CactusList.getData 1
+    pop local 3
+    push local 3
+    call Cactus.move 1
+    pop temp 0
+    push local 3
+    call Cactus.isQuiteInDinoZone 1
+    not
+    if-goto CactusList_5
+    push constant 0
+    pop this 2
+    goto CactusList_4
+label CactusList_5
+label CactusList_4
+    push local 3
+    call Cactus.isInDinoZone 1
+    not
+    if-goto CactusList_7
+    push constant 1
+    neg
+    pop this 2
+    goto CactusList_6
+label CactusList_7
+label CactusList_6
+    push local 0
+    call CactusList.getNext 1
+    pop local 1
+    push local 1
+    push constant 0
+    eq
+    not
+    if-goto CactusList_9
+    push local 3
+    call Cactus.isOut 1
+    not
+    if-goto CactusList_11
+    push local 2
+    push constant 0
+    eq
+    not
+    not
+    if-goto CactusList_13
+    push local 2
+    call CactusList.nullNext 1
+    pop temp 0
+    goto CactusList_12
+label CactusList_13
+label CactusList_12
+    push local 0
+    call CactusList.dispose 1
+    pop temp 0
+    goto CactusList_10
+label CactusList_11
+label CactusList_10
+    goto CactusList_8
+label CactusList_9
+label CactusList_8
+    push local 0
+    pop local 2
+    push local 1
+    pop local 0
+    goto CactusList_2
+label CactusList_3
+    push constant 0
+    return
+function CactusList.getNext 0
+    push argument 0
+    pop pointer 0
+    push this 1
+    return
+function CactusList.getData 0
+    push argument 0
+    pop pointer 0
+    push this 0
+    return
+function CactusList.nullNext 0
+    push argument 0
+    pop pointer 0
+    push constant 0
+    pop this 1
+    push constant 0
+    return
+function CactusList.hasCactusInDinoZone 0
+    push argument 0
+    pop pointer 0
+    push this 2
+    return

@@ -1,0 +1,80 @@
+/** Implements a dino game. */
+class DinoGame {
+	field Dino dino;
+	field GameField f;
+	field int direction; // 1=up, 2=down
+	field int score;
+	
+	constructor DinoGame new() {
+		let dino = Dino.new(32, 208);
+		let f = GameField.new();
+		let direction = 2;
+		let score = 0;
+		return this;
+	}
+	
+	method void dispose() {
+		do dino.dispose();
+		do f.dispose();
+		do Memory.deAlloc(this);
+		return;
+	}
+	
+	method boolean checkField() {
+		if (f.hasCactusInDinoZone() & (dino.getDownLine() > 222)) {
+			do Output.printString("GAME OVER!");
+			do Output.printString("SCORE: ");
+			do Output.printInt((score / 3) + 1);
+			return false;
+		}
+		if (f.hasCactusInDinoZone()) {
+			let score = score + 1;
+		}
+		return true;
+	}
+	
+	method void run() {
+		var char key;
+		var boolean continue;
+		var boolean start;
+		let continue = true;
+		let start = false;
+		
+		while (true) {
+			if (continue) {
+				while (continue & (key = 0)) {
+					let key = Keyboard.keyPressed();
+					if ((~start) & (key = 115)) {
+						let start = true;
+					}
+					if (start) {
+						let continue = checkField();
+						if (continue) {
+							do dino.move(direction);
+							do f.move();
+						}
+					}
+				
+					do Sys.wait(5);
+				}
+				if (start) {
+					if (key = 131) { let direction = 1; }
+					else { let direction = 2; }
+					
+					while (continue & ~(key = 0)) {
+						let continue = checkField();
+						if (continue) {
+							let key = Keyboard.keyPressed();
+							do dino.move(direction);
+							do f.move();
+							if (key = 131) { let direction = 1; }
+							else { let direction = 2; }
+							do Sys.wait(5);
+						}
+					}
+				}
+			}
+		}
+		return;
+	}
+}
