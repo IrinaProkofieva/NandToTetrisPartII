@@ -1,0 +1,5 @@
+.gitignore
+/VMTranslator/.idea/
+/.idea/
+/VMTranslator/out/
+/VMTranslator/VMTranslator.iml
