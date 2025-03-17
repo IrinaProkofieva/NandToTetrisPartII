@@ -38,7 +38,7 @@ public class Parser {
         return currentCommand != null;
     }
 
-    public String advance() throws IOException {
+    public String advance() {
         currentType = currentCommand != null ? CommandType.getType(currentCommand) : null;
         currentsParts = currentCommand != null ? currentCommand.split("\\s+") : null;
         return currentCommand;
