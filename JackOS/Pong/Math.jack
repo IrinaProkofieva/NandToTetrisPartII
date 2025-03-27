@@ -1,0 +1,131 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/12/Math.jack
+/**
+ *  A library of commonly used mathematical functions.
+ *  All functions runs in O(n), where n is the number of bits used
+ *  for representing a two's complement integer value (16 in the Hack computer). 
+ *  Note: Jack compilers implement multiplication and division
+ *  using calls to OS functions in this class.
+ */
+class Math {
+    static int n;             // Number of bits used for representing a two's complement integer
+    static Array powersOfTwo; // Stores 2^0, 2^1, 2^2,..., 2^(n-1)
+
+    // Initializes the Math library.
+    function void init() {
+		let n = 16;
+		let powersOfTwo = Array.new(16);
+		let powersOfTwo[0] = 1;
+		let powersOfTwo[1] = 2;
+		let powersOfTwo[2] = 4;
+		let powersOfTwo[3] = 8;
+		let powersOfTwo[4] = 16;
+		let powersOfTwo[5] = 32;
+		let powersOfTwo[6] = 64;
+		let powersOfTwo[7] = 128;
+		let powersOfTwo[8] = 256;
+		let powersOfTwo[9] = 512;
+		let powersOfTwo[10] = 1024;
+		let powersOfTwo[11] = 2048;
+		let powersOfTwo[12] = 4096;
+		let powersOfTwo[13] = 8192;
+		let powersOfTwo[14] = 16384;
+		let powersOfTwo[15] = 32767 + 1;
+		return this;
+    }
+	
+	function boolean bit(int x, int i) {
+		return x & powersOfTwo[i];
+	}
+
+    /** Returns the product of x and y. 
+     *  When a Jack compiler detects the multiplication operator '*'
+     *  in an expression, it handles it by invoking this method. 
+     *  Thus, in Jack, x * y and Math.multiply(x,y) return the same value. */
+    function int multiply(int x, int y) {
+		var int i, sum, shiftedX;
+		
+		let i = 0;
+		let sum = 0;
+		let shiftedX = x;
+		
+		while (i < n) {
+			if (~(Math.bit(y, i) = 0)) {
+				let sum = sum + shiftedX;
+			}
+			let shiftedX = shiftedX + shiftedX;
+			let i = i + 1;
+		}
+		
+		return sum;
+    }
+
+    /** Returns the integer part of x / y.
+     *  When a Jack compiler detects the division operator '/'
+     *  an an expression, it handles it by invoking this method.
+     *  Thus, x/y and Math.divide(x,y) return the same value. */
+    function int divide(int x, int y) {
+		var int xAbs, res, q, qyAbs;
+		let xAbs = Math.abs(x);
+		if ((y > xAbs) | (y < 0)) {
+			return 0;
+		}
+		let q = Math.divide(xAbs, y + y);
+		let qyAbs = q * y;
+		if ((xAbs - qyAbs - qyAbs) < y) {
+			let res = q + q;
+		} else {
+			let res = q + q + 1;
+		}
+		if (x < 0) {
+			let res = -res;
+		}
+		return res;
+    }
+
+    /** Returns the integer part of the square root of x. */
+    function int sqrt(int x) {
+		var int y, j, m, p, yp;
+		
+		let y = 0;
+		let j = (n / 2) - 1;
+		
+		while (j > -1) {
+			let p = powersOfTwo[j];
+			let yp = y + p;
+			let m = yp * yp;
+			if ((~(m > x)) & (m > 0)) {
+				let y = y + p;
+			}
+			let j = j - 1;
+		}
+		
+		return y;
+    }
+
+    /** Returns the greater value. */
+    function int max(int a, int b) {
+		if (a > b) {
+			return a;
+		}
+		return b;
+    }
+
+    /** Returns the smaller value. */
+    function int min(int a, int b) {
+		if (a < b) {
+			return a;
+		}
+		return b;
+    }
+
+    /** Returns the absolute value of x. */
+    function int abs(int x) {
+		if (x < 0) {
+			return -x;
+		}
+		return x;
+    }
+}
